@@ -1,16 +1,8 @@
-#PyTorch lib
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
-import torch.utils.data as Data
 import torch.nn.functional as F
-import torchvision
-#Tools lib
-import numpy as np
-import cv2
-import random
-import time
-import os
+
 
 #Set iteration time
 ITERATION = 4
@@ -177,7 +169,7 @@ class Generator(nn.Module):
             g = self.conv_g(x)
             o = self.conv_o(x)
             c = f * c + i * g
-            h = o * F.tanh(c)
+            h = o * torch.tanh(c)
             mask = self.det_conv_mask(h)
             mask_list.append(mask)
         x = torch.cat((input, mask), 1)
